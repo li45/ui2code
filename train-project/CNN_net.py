@@ -3,10 +3,10 @@ from tensorflow.keras.layers import BatchNormalization
 from keras.layers import Conv2D
 from keras.layers import MaxPooling2D
 from keras.initializers import TruncatedNormal
-from keras.layers.core import Activation
-from keras.layers.core import Flatten
-from keras.layers.core import Dropout
-from keras.layers.core import Dense
+from tensorflow.python.keras.layers.core import Activation
+from tensorflow.python.keras.layers.core import Flatten
+from tensorflow.python.keras.layers.core import Dropout
+from tensorflow.python.keras.layers.core import Dense
 from keras import backend as K
 
 class SimpleVGGNet:

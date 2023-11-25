@@ -2,8 +2,7 @@ from CNN_net import SimpleVGGNet
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-
-from keras.optimizers import SGD
+from keras.optimizers.legacy import SGD
 from keras.preprocessing.image import ImageDataGenerator
 import utils_paths
 import matplotlib.pyplot as plt
@@ -74,6 +73,7 @@ BS = 32
 
 # 损失函数，编译模型
 print("------开始训练网络------")
+
 opt = SGD(learning_rate=INIT_LR, decay=INIT_LR / EPOCHS)
 model.compile(loss="categorical_crossentropy", optimizer=opt,metrics=["accuracy"])
 

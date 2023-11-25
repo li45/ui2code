@@ -22,9 +22,9 @@ Label = [
     "searchbar",
     "switch"
     ]
-# testPath = "./test/button.png"
-testPath = "./test/keybord.jpg"
-testPath = "./test/searchbar.png"
+testPath = "./test/button.png"
+testPath = "./test/keybord3.jpg"
+testPath = "./test/searchbar3.jpg"
 
 images = []
 image = cv2.imread(testPath)
@@ -40,4 +40,4 @@ pred = model.predict(images)
 print(pred)
 
 max_ = np.argmax(pred)
-print('test.jpg的预测结果为：',Label[max_])
+print(testPath,'的预测结果为：',Label[max_])

@@ -1,4 +1,4 @@
-import allspark
+
 import io
 import numpy as np
 import json
@@ -11,7 +11,7 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 import time
 
-model = load_model('./train/cnn.model.h5')
+model = load_model('../train-project/cnn.model.h5')
 # pred的输入应该是一个images的数组，而且图片都已经转为numpy数组的形式
 # pred = model.predict(['./validation/button/button-demoplus-20200216-16615.png'])
 
@@ -22,7 +22,9 @@ Label = [
     "searchbar",
     "switch"
     ]
-testPath = "./test/button.png"
+# testPath = "./test/button.png"
+testPath = "./test/keybord.jpg"
+testPath = "./test/searchbar.png"
 
 images = []
 image = cv2.imread(testPath)

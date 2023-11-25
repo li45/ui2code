@@ -7,7 +7,7 @@ from keras.optimizers import SGD
 from keras.preprocessing.image import ImageDataGenerator
 import utils_paths
 import matplotlib.pyplot as plt
-from cv2 import cv2
+import cv2
 import numpy as np
 import argparse
 import random
@@ -68,17 +68,17 @@ model = SimpleVGGNet.build(width=256, height=256, depth=3,classes=len(lb.classes
 INIT_LR = 0.01
 # Epoch  
 # 这里设置 5 是为了能尽快训练完毕，可以设置高一点，比如 30
-EPOCHS = 5   
+EPOCHS = 30   
 # Batch Size
 BS = 32
 
 # 损失函数，编译模型
 print("------开始训练网络------")
-opt = SGD(lr=INIT_LR, decay=INIT_LR / EPOCHS)
+opt = SGD(learning_rate=INIT_LR, decay=INIT_LR / EPOCHS)
 model.compile(loss="categorical_crossentropy", optimizer=opt,metrics=["accuracy"])
 
 # 训练网络模型
-H = model.fit_generator(
+H = model.fit(
     aug.flow(trainX, trainY, batch_size=BS),
     validation_data=(testX, testY), 
     steps_per_epoch=len(trainX) // BS,

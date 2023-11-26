@@ -11,7 +11,7 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 import time
 
-model = load_model('../train-project/cnn.model.h5')
+model = load_model('../train-project/cnn.model.resnet101.h5')
 # pred的输入应该是一个images的数组，而且图片都已经转为numpy数组的形式
 # pred = model.predict(['./validation/button/button-demoplus-20200216-16615.png'])
 
@@ -22,22 +22,36 @@ Label = [
     "searchbar",
     "switch"
     ]
-testPath = "./test/button.png"
-testPath = "./test/keybord3.jpg"
-testPath = "./test/searchbar3.jpg"
+
+testPaths = [
+    "./test/button.png",
+    "./test/button2.jpg",
+    "./test/keybord.jpg",
+    "./test/keybord2.jpeg",
+    "./test/keybord3.jpg",
+    "./test/searchbar.png",
+    "./test/searchbar2.jpg",
+    "./test/searchbar3.jpg",
+    "./test/switch.jpg",
+    "./test/switch2.jpg",
+    "./test/switch3.jpg",
+    "./test/switch4.jpg",
+    ]
 
 images = []
-image = cv2.imread(testPath)
-# image = cv2.cvtColor(image,cv2.CLOLR_BGR2RGB)
-image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+for testPath in testPaths:
+    image = cv2.imread(testPath)
+    # image = cv2.cvtColor(image,cv2.CLOLR_BGR2RGB)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-image = cv2.resize(image,(256,256))
-images.append(image)
-images = np.asarray(images)
+    image = cv2.resize(image,(255,255))
+    images.append(image)
 
+images = np.array(images, dtype="float") / 255.0
 pred = model.predict(images)
 
+for i in range(np.shape(pred)[0]):
+    _max = np.argmax(pred[i])
+    print(_max)
+    print(testPaths[i],Label[_max])
 print(pred)
-
-max_ = np.argmax(pred)
-print(testPath,'的预测结果为：',Label[max_])

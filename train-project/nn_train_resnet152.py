@@ -12,6 +12,7 @@ import argparse
 import random
 import pickle
 from tensorflow.keras.applications.resnet import ResNet101
+from tensorflow.keras.applications.resnet import ResNet152
 import os
 
 plt.switch_backend('agg')
@@ -59,15 +60,17 @@ aug = ImageDataGenerator(
     horizontal_flip=True, 
     fill_mode="nearest")
 
+
 # 建立卷积神经网络
 model = ResNet101(
-    include_top=True,
+    include_top=False,
     weights=None,
     input_tensor=None,
     input_shape=(image_size, image_size,3),
-    pooling=None,
+    pooling="max",
     classes=len(lb.classes_)
 )
+model.load_weights("./resnet101_weights_tf_dim_ordering_tf_kernels_notop.h5")
 #model = SimpleVGGNet.build(width=256, height=256, depth=3,classes=len(lb.classes_))
 
 # 设置初始化超参数
